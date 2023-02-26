@@ -1,0 +1,38 @@
+export const mockList = [
+  {
+    id: 1,
+    title: 'airbnb/javascript',
+    tag: ['javascript', 'style-guide'],
+    content: 'JavaScript Style Guide',
+    stargazersCount: '24.5k',
+    license: 'MIT',
+    updatedAt: '2012-01-23',
+  },
+  {
+    id: 2,
+    title: 'ulid/javascript',
+    tag: ['javascript', 'style-guide', 'javascrip', 'style-guid'],
+    content: 'Universally Unique Lexicographically Sortable Identifier',
+    stargazersCount: '24.5k',
+    license: 'MIT',
+    updatedAt: '2012-01-23',
+  },
+  {
+    id: 3,
+    title: 'airbnb/javascript1',
+    tag: ['javascript', 'style-guide'],
+    content: 'JavaScript Style Guide',
+    stargazersCount: '24.5k',
+    license: 'MIT',
+    updatedAt: '2012-01-23',
+  },
+  {
+    id: 4,
+    title: 'ulid/javascript2',
+    tag: ['javascript', 'style-guide', 'javascrip', 'style-guid'],
+    content: 'Universally Unique Lexicographically Sortable Identifier',
+    stargazersCount: '24.5k',
+    license: 'MIT',
+    updatedAt: '2012-01-23',
+  },
+];

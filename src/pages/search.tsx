@@ -3,6 +3,7 @@ import Pagination from '../components/Pagination';
 import Card from '../components/RepoCard';
 import SearchForm from '../components/SearchForm';
 import useBookmark from '../hooks/useBookmark';
+import { mockList } from '../mockData';
 
 type ListType = {
   title: string;
@@ -13,27 +14,6 @@ type ListType = {
   license: string;
   updatedAt: string;
 };
-
-const mockList = [
-  {
-    id: 1,
-    title: 'airbnb/javascript',
-    tag: ['javascript', 'style-guide'],
-    content: 'JavaScript Style Guide',
-    stargazersCount: '24.5k',
-    license: 'MIT',
-    updatedAt: '2012-01-23',
-  },
-  {
-    id: 2,
-    title: 'ulid/javascript',
-    tag: ['javascript', 'style-guide', 'javascrip', 'style-guid'],
-    content: 'Universally Unique Lexicographically Sortable Identifier',
-    stargazersCount: '24.5k',
-    license: 'MIT',
-    updatedAt: '2012-01-23',
-  },
-];
 
 const SearchPage = () => {
   const [searchList, setSearchList] = useState<ListType[] | null>(null);
