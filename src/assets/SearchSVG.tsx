@@ -1,7 +1,6 @@
 const SearchSVG = () => {
   return (
     <svg
-      className="absolute right-3 z-10 cursor-pointer"
       width="24"
       height="24"
       viewBox="0 0 24 24"
