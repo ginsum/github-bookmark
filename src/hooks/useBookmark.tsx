@@ -24,14 +24,14 @@ const useBookmark = () => {
   };
 
   const removeBookmark = (title: string) => {
-    const newBookmark = bookmark?.filter((el) => el.title !== title);
-    window.localStorage.setItem('bookmarks', JSON.stringify(newBookmark));
-    setBookmark(newBookmark);
+    const filterBookmark = bookmark?.filter((el) => el.title !== title);
+    window.localStorage.setItem('bookmarks', JSON.stringify(filterBookmark));
+    setBookmark(filterBookmark);
   };
 
   const handleBookmark = (title: string, description: string) => {
-    const checkBookmark = bookmark.filter((el) => el.title === title);
-    if (checkBookmark.length > 0) {
+    const filterBookmark = bookmark.filter((el) => el.title === title);
+    if (filterBookmark.length > 0) {
       removeBookmark(title);
     } else {
       addBookmark(title, description);

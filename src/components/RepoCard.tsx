@@ -28,13 +28,18 @@ const RepoCard = ({
   movePage,
 }: RepoCardProps) => {
   return (
-    <div
-      className="w-full px-5 py-6 my-2 border border-zinc-200 rounded-2xl cursor-pointer shadow"
-      onClick={movePage}
-    >
+    <div className="w-full px-5 py-6 my-2 border border-zinc-200 rounded-2xl shadow">
       <div className="flex justify-between pb-1.5 border-b border-zinc-200">
-        <div className="text-lg font-bold text-blue-700">{title}</div>
-        <div onClick={() => handleBookmark(title, description)}>
+        <div
+          className="text-lg font-bold text-blue-700 cursor-pointer break-all"
+          onClick={movePage}
+        >
+          {title}
+        </div>
+        <div
+          className="cursor-pointer"
+          onClick={() => handleBookmark(title, description)}
+        >
           <BookmarkSVG isBookmark={isBookmark} />
         </div>
       </div>
@@ -52,8 +57,10 @@ const RepoCard = ({
             ))}
           </div>
           <div className="flex text-xs mt-1 text-zinc-400">
-            <div className="mr-3">{stargazersCount}</div>
-            <div className="mr-3">{license}</div>
+            {!!stargazersCount && (
+              <div className="mr-3">{stargazersCount} stars</div>
+            )}
+            {license && <div className="mr-3">{license}</div>}
             <div>{updatedAt}</div>
           </div>
         </>
