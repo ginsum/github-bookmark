@@ -4,6 +4,12 @@
 
 유저가 Github Public Repository를 검색할 수 있고, 원하는 Repository를 Bookmark 할 수 있으며, 해당 Repository의 Issue를 모아서 볼 수 있습니다.
 
+## 배포 주소
+
+https://github-bookmark.vercel.app/
+
+- vercel을 사용하여 배포
+
 ## 실행방법
 
 ```
@@ -86,5 +92,5 @@ src
 - Github API 처음 사용해 보았는데, 검색 뿐 아니라 다른 기능들도 유용하게 사용해 볼 수 있을 것 같았습니다.
 - Tailwindcss를 선택한 이유는 이전 회사에서 사용해 보아 익숙하였고, 간단한 프로젝트에서 빠르게 작성하기 좋다고 생각하여서 입니다.
 - 페이지네이션을 라이브러리를 사용하지 않고 직접 구현했는데, 기능이 한정적으로 밖에 구현하지 못해 아쉽습니다.
-- loading 관련해서 recoil이나 react-query를 사용해서 처리하고 싶었으나 시간상 붙이지 못한 점이 아쉽습니다.
+- Issue 리스트 보여줄때 closed 된 이슈를 보여주는 부분을 추가하지 못해 아쉬습니다.
 - 에러 관련 처리를 시간상 하지 못해 그 부분 또한 아쉽습니다.
