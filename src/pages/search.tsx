@@ -1,39 +1,19 @@
 import { useEffect, useState } from 'react';
-import Pagination from '../components/Pagination';
-import Card from '../components/RepoCard';
+
 import SearchForm from '../components/SearchForm';
+import RepoList from '../container/RepoList';
 import { searchRepo } from '../fetch';
-import useBookmark from '../hooks/useBookmark';
-
-type ListType = {
-  title: string;
-  description: string;
-  tag: string[];
-  id: number;
-  stargazersCount: number;
-  license?: string;
-  updatedAt: string;
-};
-
-type getListType = {
-  id: number;
-  topics?: string[];
-  description: string | null;
-  full_name: string;
-  stargazers_count: number;
-  license: { name: string } | null;
-  updated_at: string;
-};
+import { RepoInfoType } from '../types';
 
 const SearchPage = () => {
-  const [searchList, setSearchList] = useState<ListType[] | null>(null);
+  const [searchList, setSearchList] = useState<RepoInfoType[] | null>(null);
   const [searchText, setSearchText] = useState<string>('');
   const [page, setPage] = useState<number>(1);
   const [totalCount, setTotalCount] = useState<number>(0);
-
-  const { handleBookmark, checkBookmark } = useBookmark();
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const getSearchRepo = async (text: string) => {
+    setIsLoading(true);
     const { list, totalCount } = await searchRepo({ searchText: text, page });
 
     const newList = list.map(
@@ -45,7 +25,8 @@ const SearchPage = () => {
         stargazers_count,
         license,
         updated_at,
-      }: getListType) => ({
+        html_url,
+      }) => ({
         id,
         title: full_name,
         description: description || '',
@@ -53,13 +34,18 @@ const SearchPage = () => {
         stargazersCount: stargazers_count,
         license: license?.name || '',
         updatedAt: updated_at.slice(0, 10),
+        url: html_url,
       })
     );
     setSearchList(newList);
-    setTotalCount(totalCount);
+    if (page === 1) {
+      setTotalCount(Math.ceil(totalCount / 10));
+    }
+    setIsLoading(false);
   };
 
-  const handleSearch = async (text: string) => {
+  const submitSearch = async (text: string) => {
+    setPage(1);
     setSearchText(text);
     await getSearchRepo(text);
   };
@@ -72,38 +58,23 @@ const SearchPage = () => {
 
   return (
     <>
-      <SearchForm handleSearch={handleSearch} />
+      <SearchForm submitSearch={submitSearch} />
       {searchList ? (
         <>
-          <div className=" text-zinc-500 mb-2">
-            * {searchText} 의 검색 결과입니다.
-          </div>
-          {searchList?.map(
-            ({
-              id,
-              title,
-              tag,
-              description,
-              stargazersCount,
-              license,
-              updatedAt,
-            }) => (
-              <Card
-                key={title}
-                title={title}
-                tag={tag}
-                description={description}
-                id={id}
-                stargazersCount={stargazersCount}
-                license={license}
-                updatedAt={updatedAt}
-                isBookmark={checkBookmark(title)}
-                handleBookmark={handleBookmark}
-                isBookmarkPage={false}
-              />
-            )
+          {searchList?.length > 0 ? (
+            <RepoList
+              page={page}
+              totalCount={totalCount}
+              setPage={setPage}
+              isLoading={isLoading}
+              searchList={searchList}
+              searchText={searchText}
+            />
+          ) : (
+            <div className="text-sm text-zinc-500">
+              {searchText}의 검색 결과가 없습니다.
+            </div>
           )}
-          <Pagination page={page} totalCount={totalCount} setPage={setPage} />
         </>
       ) : (
         <div className="text-sm text-zinc-500">검색어를 입력해 주세요</div>
