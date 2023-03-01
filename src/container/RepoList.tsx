@@ -35,33 +35,16 @@ const RepoList = ({
       {isLoading ? (
         <Skeleton />
       ) : (
-        searchList?.map(
-          ({
-            id,
-            title,
-            tag,
-            description,
-            stargazersCount,
-            license,
-            updatedAt,
-            url = '',
-          }) => (
-            <Card
-              key={title}
-              title={title}
-              tag={tag}
-              description={description}
-              id={id}
-              stargazersCount={stargazersCount}
-              license={license}
-              updatedAt={updatedAt}
-              isBookmark={checkBookmark(title)}
-              handleBookmark={handleBookmark}
-              isBookmarkPage={false}
-              movePage={() => moveGithubRepo(url)}
-            />
-          )
-        )
+        searchList?.map((list) => (
+          <Card
+            key={list.title}
+            repoInfo={list}
+            isBookmark={checkBookmark(list.title)}
+            handleBookmark={handleBookmark}
+            isBookmarkPage={false}
+            movePage={() => moveGithubRepo(list.url || '')}
+          />
+        ))
       )}
       <Pagination page={page} totalCount={totalCount} setPage={setPage} />
     </>

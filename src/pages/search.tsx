@@ -16,6 +16,7 @@ const SearchPage = () => {
 
   const getSearchRepo = async (text: string) => {
     setIsListLoading(true);
+
     const { list, totalCount } = await searchRepo({ searchText: text, page });
 
     const newList = list.map(
@@ -39,10 +40,13 @@ const SearchPage = () => {
         url: html_url,
       })
     );
+
     setSearchList(newList);
+
     if (page === 1) {
       setTotalCount(Math.ceil(totalCount / 10));
     }
+
     setIsListLoading(false);
   };
 

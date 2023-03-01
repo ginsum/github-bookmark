@@ -22,7 +22,6 @@ const RepoDetailPage = () => {
     setSearchLoading(true);
 
     const {
-      id,
       topics,
       description,
       full_name,
@@ -33,7 +32,6 @@ const RepoDetailPage = () => {
     } = await getRepo({ owner, repo });
 
     const info = {
-      id,
       title: full_name,
       description: description || '',
       tag: topics?.slice(0, 6) || [],
@@ -41,8 +39,10 @@ const RepoDetailPage = () => {
       license: license?.name || '',
       updatedAt: updated_at.slice(0, 10),
     };
+
     setRepoInfo(info);
     setTotalCount(open_issues);
+
     setSearchLoading(false);
   };
 
@@ -51,8 +51,7 @@ const RepoDetailPage = () => {
 
     const list = await getIssues({ owner, repo, page });
     const newList = list.map(
-      ({ id, title, number, state, created_at, html_url, user }) => ({
-        id,
+      ({ title, number, state, created_at, html_url, user }) => ({
         title,
         number,
         state,
@@ -63,6 +62,7 @@ const RepoDetailPage = () => {
     );
 
     setIssueList(newList);
+
     setIsLoading(false);
   };
 
@@ -122,20 +122,9 @@ const RepoDetailPage = () => {
             <Skeleton />
           ) : (
             <div>
-              {issueList.map(
-                ({ id, title, state, number, createdAt, url, userName }) => (
-                  <Card
-                    key={id}
-                    title={title}
-                    id={id}
-                    number={number}
-                    state={state}
-                    createdAt={createdAt}
-                    url={url}
-                    userName={userName}
-                  />
-                )
-              )}
+              {issueList.map((list) => (
+                <Card key={list.title} issueInfo={list} />
+              ))}
             </div>
           )}
           <Pagination page={page} totalCount={totalCount} setPage={setPage} />

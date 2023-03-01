@@ -1,13 +1,14 @@
 import BookmarkSVG from '../assets/BookmarkSVG';
 
 type RepoCardProps = {
-  title: string;
-  description: string;
-  tag?: string[];
-  id?: number;
-  stargazersCount?: number;
-  license?: string;
-  updatedAt?: string;
+  repoInfo: {
+    title: string;
+    description: string;
+    tag?: string[];
+    stargazersCount?: number;
+    license?: string;
+    updatedAt?: string;
+  };
   isBookmark: boolean;
   isBookmarkPage: boolean;
   handleBookmark: (title: string, description: string) => void;
@@ -15,18 +16,15 @@ type RepoCardProps = {
 };
 
 const RepoCard = ({
-  title,
-  tag,
-  description,
-  id,
-  stargazersCount,
-  license,
-  updatedAt,
+  repoInfo,
   isBookmark,
   handleBookmark,
   isBookmarkPage,
   movePage,
 }: RepoCardProps) => {
+  const { title, tag, description, stargazersCount, license, updatedAt } =
+    repoInfo;
+
   return (
     <div className="w-full px-5 py-6 my-2 border border-zinc-200 rounded-2xl shadow">
       <div className="flex justify-between pb-1.5 border-b border-zinc-200">

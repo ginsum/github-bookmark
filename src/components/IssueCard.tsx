@@ -1,14 +1,11 @@
 import { IssueInfoType } from '../types';
 
-const IssueCard = ({
-  title,
-  id,
-  state,
-  number,
-  createdAt,
-  url,
-  userName,
-}: IssueInfoType) => {
+type IssueCardProps = {
+  issueInfo: IssueInfoType;
+};
+
+const IssueCard = ({ issueInfo }: IssueCardProps) => {
+  const { title, state, number, createdAt, url, userName } = issueInfo;
   return (
     <div className="w-full py-4 border-b border-zinc-200 curser-pointer">
       <div className="flex items-center">

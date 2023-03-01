@@ -2,7 +2,6 @@ export type RepoInfoType = {
   title: string;
   description: string;
   tag: string[];
-  id: number;
   stargazersCount: number;
   license?: string;
   updatedAt: string;
@@ -10,7 +9,6 @@ export type RepoInfoType = {
 };
 
 export type IssueInfoType = {
-  id: number;
   title: string;
   state: string;
   number: number;

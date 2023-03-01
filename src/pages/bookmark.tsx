@@ -20,8 +20,7 @@ const BookmarkPage = () => {
           {bookmark?.map(({ title, description }) => (
             <Card
               key={title}
-              title={title}
-              description={description}
+              repoInfo={{ title, description }}
               isBookmark={checkBookmark(title)}
               handleBookmark={handleBookmark}
               isBookmarkPage={true}
