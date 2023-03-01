@@ -1,38 +1,46 @@
 import { useState, useEffect } from 'react';
 
 const useBookmark = () => {
-  const [bookmark, setBookmark] = useState<number[]>([]);
-  const bookmarkIdList = window.localStorage.getItem('bookmarkIds');
+  const [bookmark, setBookmark] = useState<
+    { title: string; description: string }[]
+  >([]);
+  const bookmarkList = window.localStorage.getItem('bookmarks') || '[]';
 
   useEffect(() => {
-    const bookmarkIds = bookmarkIdList ? JSON.parse(bookmarkIdList) : [];
-    setBookmark(bookmarkIds);
+    const bookmarks = JSON.parse(bookmarkList);
+    setBookmark(bookmarks);
   }, []);
 
-  const addBookmark = (id: number) => {
+  const addBookmark = (title: string, description: string) => {
     if (bookmark?.length < 4) {
       window.localStorage.setItem(
-        'bookmarkIds',
-        JSON.stringify([...bookmark, id])
+        'bookmarks',
+        JSON.stringify([...bookmark, { title, description }])
       );
-      setBookmark([...bookmark, id]);
+      setBookmark([...bookmark, { title, description }]);
     } else {
       alert('북마크는 4개 이상 등록할 수 없습니다');
     }
   };
 
-  const removeBookmark = (id: number) => {
-    const newBookmark = bookmark?.filter((el: number) => el !== id);
-    window.localStorage.setItem('bookmarkIds', JSON.stringify(newBookmark));
+  const removeBookmark = (title: string) => {
+    const newBookmark = bookmark?.filter((el) => el.title !== title);
+    window.localStorage.setItem('bookmarks', JSON.stringify(newBookmark));
     setBookmark(newBookmark);
   };
 
-  const handleBookmark = (id: number) => {
-    if (bookmark?.includes(id)) {
-      removeBookmark(id);
+  const handleBookmark = (title: string, description: string) => {
+    const checkBookmark = bookmark.filter((el) => el.title === title);
+    if (checkBookmark.length > 0) {
+      removeBookmark(title);
     } else {
-      addBookmark(id);
+      addBookmark(title, description);
     }
+  };
+
+  const checkBookmark = (title: string) => {
+    const filterBookmark = bookmark.filter((el) => el.title === title);
+    return filterBookmark.length > 0;
   };
 
   return {
@@ -40,6 +48,7 @@ const useBookmark = () => {
     addBookmark,
     removeBookmark,
     handleBookmark,
+    checkBookmark,
   };
 };
 
