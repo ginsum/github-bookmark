@@ -6,7 +6,7 @@ const Skeleton = () => {
       {listArr.map((el, index) => (
         <div
           key={index}
-          className="animate-pulse w-full h-20 mb-3 bg-zinc-200 rounded-xl"
+          className="animate-pulse w-full h-20 mb-3 bg-zinc-100 rounded-xl"
         />
       ))}
     </div>

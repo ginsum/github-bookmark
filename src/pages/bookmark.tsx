@@ -1,6 +1,7 @@
 import { useNavigate } from 'react-router-dom';
-import Card from '../components/RepoCard';
+
 import useBookmark from '../hooks/useBookmark';
+import Card from '../components/RepoCard';
 
 const BookmarkPage = () => {
   const { bookmark, handleBookmark, checkBookmark } = useBookmark();

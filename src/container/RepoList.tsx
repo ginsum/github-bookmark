@@ -1,7 +1,7 @@
+import useBookmark from '../hooks/useBookmark';
 import Pagination from '../components/Pagination';
 import Skeleton from '../components/Skeleton';
 import Card from '../components/RepoCard';
-import useBookmark from '../hooks/useBookmark';
 import { RepoInfoType } from '../types';
 
 type RepoListProps = {

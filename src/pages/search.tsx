@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 
+import Loading from '../components/Loading';
 import SearchForm from '../components/SearchForm';
 import RepoList from '../container/RepoList';
 import { searchRepo } from '../fetch';
@@ -10,10 +11,11 @@ const SearchPage = () => {
   const [searchText, setSearchText] = useState<string>('');
   const [page, setPage] = useState<number>(1);
   const [totalCount, setTotalCount] = useState<number>(0);
-  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isListLoading, setIsListLoading] = useState<boolean>(false);
+  const [isSearchLoading, setSearchLoading] = useState<boolean>(false);
 
   const getSearchRepo = async (text: string) => {
-    setIsLoading(true);
+    setIsListLoading(true);
     const { list, totalCount } = await searchRepo({ searchText: text, page });
 
     const newList = list.map(
@@ -41,13 +43,17 @@ const SearchPage = () => {
     if (page === 1) {
       setTotalCount(Math.ceil(totalCount / 10));
     }
-    setIsLoading(false);
+    setIsListLoading(false);
   };
 
   const submitSearch = async (text: string) => {
-    setPage(1);
+    setSearchLoading(true);
+
     setSearchText(text);
+    setPage(1);
     await getSearchRepo(text);
+
+    setSearchLoading(false);
   };
 
   useEffect(() => {
@@ -66,7 +72,7 @@ const SearchPage = () => {
               page={page}
               totalCount={totalCount}
               setPage={setPage}
-              isLoading={isLoading}
+              isLoading={isListLoading}
               searchList={searchList}
               searchText={searchText}
             />
@@ -79,6 +85,7 @@ const SearchPage = () => {
       ) : (
         <div className="text-sm text-zinc-500">검색어를 입력해 주세요</div>
       )}
+      {isSearchLoading && <Loading />}
     </>
   );
 };

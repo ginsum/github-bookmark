@@ -1,4 +1,5 @@
 import { useState, KeyboardEvent } from 'react';
+
 import SearchSVG from '../assets/SearchSVG';
 
 type SearchFormProps = {

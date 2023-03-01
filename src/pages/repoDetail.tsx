@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+
 import Card from '../components/IssueCard';
+import Loading from '../components/Loading';
 import Pagination from '../components/Pagination';
 import Skeleton from '../components/Skeleton';
 import { getIssues, getRepo } from '../fetch';
@@ -12,10 +14,13 @@ const RepoDetailPage = () => {
   const [page, setPage] = useState<number>(1);
   const [totalCount, setTotalCount] = useState<number>(0);
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isSearchLoading, setSearchLoading] = useState<boolean>(false);
 
   const { owner = '', repo = '' } = useParams();
 
   const getRepoInfo = async () => {
+    setSearchLoading(true);
+
     const {
       id,
       topics,
@@ -38,6 +43,7 @@ const RepoDetailPage = () => {
     };
     setRepoInfo(info);
     setTotalCount(open_issues);
+    setSearchLoading(false);
   };
 
   const fetchIssues = async () => {
@@ -139,6 +145,7 @@ const RepoDetailPage = () => {
           open 상태의 issue가 없습니다.
         </div>
       )}
+      {isSearchLoading && <Loading />}
     </>
   );
 };

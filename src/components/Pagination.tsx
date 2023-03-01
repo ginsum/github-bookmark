@@ -1,5 +1,5 @@
 import LeftArrowSVG from '../assets/LeftArrowSVG';
-import RightArrowSVG from '../assets/RightArrow';
+import RightArrowSVG from '../assets/RightArrowSVG';
 
 type PaginationProps = {
   page: number;
