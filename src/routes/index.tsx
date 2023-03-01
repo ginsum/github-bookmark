@@ -8,7 +8,7 @@ const Root = () => {
     <Routes>
       <Route path="/" element={<SearchPage />} />
       <Route path="/bookmark" element={<BookmarkPage />} />
-      <Route path="/detail" element={<DetailPage />} />
+      <Route path="/bookmark/:owner/:repo" element={<DetailPage />} />
     </Routes>
   );
 };

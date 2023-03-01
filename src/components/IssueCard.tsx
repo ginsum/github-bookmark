@@ -1,42 +1,36 @@
 import { useNavigate } from 'react-router-dom';
 
+type IssueCardProps = {
+  title: string;
+  id: number;
+  state: string;
+  number: number;
+  createdAt: string;
+  url: string;
+};
+
 const IssueCard = ({
   title,
-  tag,
   id,
-  stargazersCount,
-  license,
-  updatedAt,
-}: {
-  title: string;
-  tag: string[];
-  id: string;
-  stargazersCount: string;
-  license: string;
-  updatedAt: string;
-}) => {
-  let navigate = useNavigate();
-
+  state,
+  number,
+  createdAt,
+  url,
+}: IssueCardProps) => {
   return (
-    <div
-      className="w-full p-5 my-2 border-b border-zinc-200 "
-      onClick={() => navigate(id)}
-    >
+    <div className="w-full py-4 border-b border-zinc-200 curser-pointer">
       <div className="flex items-center">
-        <div className="text-lg font-bold">{title}</div>
-        <div className="flex ml-2">
-          {tag.map((el) => (
-            <div className="flex items-center h-5 px-1.5 mr-1 text-xs border border-red-400 text-red-600 rounded-xl">
-              {el}
-            </div>
-          ))}
+        <div className="flex items-center px-2.5 py-1 mr-2 text-xs border border-emerald-400 text-emerald-600 rounded-xl">
+          {state}
         </div>
+        <a href={url} target="_blank" rel="noreferrer">
+          <div className="text-lg font-bold text-zinc-600">{title}</div>
+        </a>
       </div>
 
-      <div className="flex text-xs mt-1">
-        <div>{stargazersCount}</div>
-        <div>{license}</div>
-        <div>{updatedAt}</div>
+      <div className="flex text-xs mt-1 text-zinc-400">
+        <div className="mr-2">{number}</div>
+        <div>{createdAt}</div>
       </div>
     </div>
   );

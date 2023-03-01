@@ -3,6 +3,7 @@ import { Octokit } from 'octokit';
 type requestType = {
   owner: string;
   repo: string;
+  page?: number;
 };
 
 const octokit = new Octokit();
@@ -31,11 +32,12 @@ export const getRepo = async ({ owner, repo }: requestType) => {
   return result.data;
 };
 
-export const getIssues = async ({ owner, repo }: requestType) => {
+export const getIssues = async ({ owner, repo, page }: requestType) => {
   const result = await octokit.request('GET /repos/{owner}/{repo}/issues', {
     owner,
     repo,
     per_page: 10,
+    page,
   });
   console.log(result, 'resul');
   return result.data;
