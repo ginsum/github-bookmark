@@ -39,6 +39,6 @@ export const getIssues = async ({ owner, repo, page }: requestType) => {
     per_page: 10,
     page,
   });
-  console.log(result, 'resul');
+
   return result.data;
 };

@@ -1,6 +1,6 @@
 import { Routes, Route } from 'react-router-dom';
 import BookmarkPage from '../pages/bookmark';
-import DetailPage from '../pages/detail';
+import RepoDetailPage from '../pages/repoDetail';
 import SearchPage from '../pages/search';
 
 const Root = () => {
@@ -8,7 +8,7 @@ const Root = () => {
     <Routes>
       <Route path="/" element={<SearchPage />} />
       <Route path="/bookmark" element={<BookmarkPage />} />
-      <Route path="/bookmark/:owner/:repo" element={<DetailPage />} />
+      <Route path="/bookmark/:owner/:repo" element={<RepoDetailPage />} />
     </Routes>
   );
 };

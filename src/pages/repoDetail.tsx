@@ -6,7 +6,7 @@ import Skeleton from '../components/Skeleton';
 import { getIssues, getRepo } from '../fetch';
 import { IssueInfoType, RepoInfoType } from '../types';
 
-const DetailPage = () => {
+const RepoDetailPage = () => {
   const [issueList, setIssueList] = useState<IssueInfoType[]>([]);
   const [repoInfo, setRepoInfo] = useState<RepoInfoType | null>(null);
   const [page, setPage] = useState<number>(1);
@@ -143,4 +143,4 @@ const DetailPage = () => {
   );
 };
 
-export default DetailPage;
+export default RepoDetailPage;
