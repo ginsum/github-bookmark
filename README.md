@@ -1,46 +1,61 @@
-# Getting Started with Create React App
+# Github Repo Search & Bookmark
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## 프로젝트 설명
 
-## Available Scripts
+유저가 Github Public Repository를 검색할 수 있고, 원하는 Repository를 Bookmark 할 수 있으며, 해당 Repository의 Issue를 모아서 볼 수 있습니다.
 
-In the project directory, you can run:
+## 실행방법
 
-### `yarn start`
+```
+$ git clone https://github.com/ginsum/github-bookmark.git
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+$ cd ph-assignment
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+$ npm install
 
-### `yarn test`
+$ npm start
+```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+실행 주소
+[http://localhost:3000](http://localhost:3000)
 
-### `yarn build`
+## Client 프로젝트 구조
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```
+src
+├── assets
+├── components
+├── container
+├── fetch
+├── pages
+├── routes
+├── types
+├── app.tsx
+├── index.sss
+└── index.tsx
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- components: 공통으로 쓰일 수 있는 Card, SearchForm, Pagination, Skeleton 등의 컴포넌트
+- container: search 페이지의 Repo 결과를 보여주는 부분을 RepoList로 분리
+- fetch: Octokit를 사용하여 Github api 요청
+- page: 검색을 위한 search, 북마크를 볼 수 있는 bookmark, 북마크한 repo의 issue를 모아보는 repoDetail
+- routes: 페이지 이동 하기 위한 routing 파일
+- types: type을 위한 파일
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## 사용 라이브러리
 
-### `yarn eject`
+- Tailwindcss
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+- Octokit를
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## 구현 기능
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+1. Github Public Repository를 검색
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+2. Repository를 Bookmark 추가 및 삭제
 
-## Learn More
+3. 북마크한 각각의 Repository의 Issue 보기
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## 작업하면서 느낀 점
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+-
