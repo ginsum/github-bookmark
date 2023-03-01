@@ -7,12 +7,19 @@ type requestType = {
 
 const octokit = new Octokit();
 
-export const searchRepo = async ({ searchText }: { searchText: string }) => {
+export const searchRepo = async ({
+  searchText,
+  page,
+}: {
+  searchText: string;
+  page: number;
+}) => {
   const result = await octokit.request('GET /search/repositories', {
     q: searchText,
     per_page: 10,
+    page,
   });
-  return result.data.items;
+  return { list: result.data.items, totalCount: result.data.total_count };
 };
 
 export const getRepo = async ({ owner, repo }: requestType) => {
