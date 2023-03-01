@@ -88,7 +88,7 @@ const RepoDetailPage = () => {
         bookmark list로 돌아가기
       </div>
 
-      <div className="text-lg font-bold text-blue-700 mt-8">{title}</div>
+      <div className="text-lg font-bold text-blue-700 mt-2">{title}</div>
       <div className="mt-3 text-sm text-zinc-500">{description}</div>
       <div className="flex flex-wrap mt-3 ">
         {tag?.map((el) => (
